@@ -84,7 +84,7 @@ To run with Docker, some extra steps are needed. Assuming `docker` is installed:
 2. In order to run NOVOPlasty within the container, input files including `config.txt` and the files that it specifies must be accessible within the container. The container's default work directory is `/work`. Assuming that `config.txt` and it specifies the files `reads_1.fastq` and `reads_2.fastq`, all within the current working directory, the following should work:
 
 <code>docker run -it --user $(id -u):$(id -g) --volume "${PWD}":/work  [dockerhub_username]/novoplasty:[version] NOVOPlasty.pl -c config.txt</code>
-
+3. Notes on running with Docker
 	-I recommend using the tidbit `--user $(id -u):$(id -g)` to ensure that files created within the container are the same as the host. If you exclude this, files created within the container will be owned by the default Docker user, `root`. The easiest way to remove files owned by `root` is by executing `rm` with root privileges (i.e., `sudo rm ...`).
 	-`--volume "${PWD}":/work` maps the current working directory to a directory within the container (you can check your current working directory with `echo "${PWD}"`, or `pwd`). As long as the files `config.txt` and the files it specifies are located within your current working directory, this is all you need.
 	- If you want to specify absolute paths in `config.txt`, the paths must be real locations within the *container*, not the host. E.g., if `config.txt` specifies that its reads are located at `/path/to/reads/reads_1.fastq`, that path must be mounted within the container by passing it to `--volume`; `docker run --volume [mount options] -it [dockerhub_username]/novoplasty:[version] ls /path/to/reads/reads_1.fastq` must return that the file exists.
