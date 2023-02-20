@@ -26,7 +26,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
 CMD [ "/bin/bash" ]
 RUN conda update -n base -c defaults conda
 
-# Install NOVOPlasty and create mount points for config file
+# Install NOVOPlasty and set work directory
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
 ENV PATH /opt/conda/envs/novoplasty/bin:"${PATH}"
