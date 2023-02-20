@@ -1,0 +1,7 @@
+# This file creates a conda env to install Novoplasty.
+# It can be used with conda create -f environment.yml
+name: novoplasty
+channels:
+  - bioconda
+dependencies:
+  - novoplasty=4.3.1
